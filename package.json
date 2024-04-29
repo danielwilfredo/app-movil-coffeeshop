@@ -14,7 +14,9 @@
     "@react-navigation/native-stack": "^6.9.26",
     "expo": "~50.0.14",
     "expo-status-bar": "~1.11.1",
+    "expo-web-browser": "^12.8.2",
     "react": "18.2.0",
+    "react-google-recaptcha": "^3.1.0",
     "react-native": "0.73.6",
     "react-native-datepicker": "^1.7.2"
   },

@@ -4,18 +4,57 @@ import { StyleSheet, Text, View,Image, TouchableOpacity, Alert } from 'react-nat
 import { useState } from 'react';
 import Input from '../components/Inputs/Input'
 
+//import ip from '../utils/constantes.js'
+
 export default function Sesion({navigation}) {
 
   const [isContra, setIsContra]=useState(true)
+  const [usuario, setUsuario]=useState('')
+  const [contrasenia, setContrasenia] = useState('')
+  //const [confirmarContrasenia, setConfirmarContrasenia] = useState('')
+  //http://localhost/coffeeshop/api/services/public/cliente.php?action=signUpMovil
+  
+
+      const ip = 'http://10.10.0.168';
+      //const ipR = ip;
 
 
-  const irHome = async () => {
-    navigation.navigate('Home');
+ const handlerLogin = async () => {
+    const formData = new FormData();
+    formData.append('correo', usuario);
+    formData.append('clave', contrasenia);
+    try {
+      //utilizar la direccion IP del servidor y no localhost
+      const response = await fetch(`${ip}/coffeeshop/api/services/public/cliente.php?action=logIn`, {
+        method: 'POST',
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.status) {
+          navigation.navigate('Home');
+      } else {
+        console.log(data);
+        // Alert the user about the error
+        Alert.alert('Error', data.error);
+      }
+    } catch (error) {
+      console.error(error, "Error desde Catch");
+      Alert.alert('Error', 'Ocurrió un error al iniciar sesión');
+    }
   };
 
+  /*
+  const handlerLogin = async () => {
+    navigation.navigate('Home');
+  };
+*/
   const irRegistrar = async () => {
     navigation.navigate('SignUp');
   };
+
+
 
   return (
     <View style={styles.container}>
@@ -27,11 +66,16 @@ export default function Sesion({navigation}) {
       <Text style={styles.texto}>Iniciar Sesión</Text>
      
       <Input 
-      placeHolder='Usuario' />
+      placeHolder='Usuario' 
+      setValor={usuario}
+      setTextChange={setUsuario}
+      />
          <Input 
       placeHolder='Contraseña'
+      setValor={contrasenia}
+      setTextChange={setContrasenia}
       contra={isContra} />
-      <TouchableOpacity style={styles.button} onPress={irHome}><Text style={styles.buttonText}>Iniciar Sesión</Text></TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={handlerLogin}><Text style={styles.buttonText}>Iniciar Sesión</Text></TouchableOpacity>
       <TouchableOpacity onPress={irRegistrar}><Text style={styles.textRegistrar}>Registrar Usuario</Text></TouchableOpacity>
     </View>
   );

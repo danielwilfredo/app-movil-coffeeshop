@@ -1,7 +1,7 @@
 
 import { StyleSheet, Text, View,TextInput, TouchableOpacity, Alert } from 'react-native';
 
-export default function Input({placeHolder, setValor, contra}) {
+export default function Input({placeHolder, setValor, contra, setTextChange}) {
 
   return (
 
@@ -11,6 +11,7 @@ export default function Input({placeHolder, setValor, contra}) {
     value={setValor}
     placeholderTextColor={'#FFF'}
     secureTextEntry={contra} 
+    onChangeText={setTextChange}
     />
 
   );
