@@ -2,6 +2,7 @@
 import { StyleSheet, Text, View,TextInput, TouchableOpacity, Alert } from 'react-native';
 import { useState } from 'react';
 import * as Constantes from '../utils/constantes'
+import Buttons from '../components/Buttons/Button';
 
 
 export default function Home({navigation}) {
@@ -37,17 +38,23 @@ export default function Home({navigation}) {
   };
 
   const irActualizar = async () => {
-    navigation.navigate('UpdateUser');
+    navigation.navigate('Productos');
   };
 
  return (
     <View style={styles.container}>
-      <Text>Pantalla de Home, Luego de iniciar sesion</Text>
+      <Text>Pantalla de Home</Text>
       
-      <TouchableOpacity style={styles.button} onPress={handleLogout}><Text style={styles.buttonText}>Cerrar Sesión</Text></TouchableOpacity>
+      <Buttons
+      textoBoton='Cerrar Sesión'
+      accionBoton={handleLogout}
+      />
       
-      <TouchableOpacity style={styles.button} onPress={irActualizar}><Text style={styles.buttonText}>Actualizar usuario</Text></TouchableOpacity>
-      
+      <Buttons
+      textoBoton='Ver Productos'
+      accionBoton={irActualizar}
+      />
+
     </View>
   );
 }
@@ -55,7 +62,7 @@ export default function Home({navigation}) {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#fff',
+      backgroundColor: '#EAD8C0',
       alignItems: 'center',
       justifyContent: 'center'
     },

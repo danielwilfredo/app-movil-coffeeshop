@@ -3,7 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View,Image, TouchableOpacity, Alert } from 'react-native';
 import { useState } from 'react';
 import Input from '../components/Inputs/Input'
-
+import Buttons from '../components/Buttons/Button';
 //import ip from '../utils/constantes.js'
 
 export default function Sesion({navigation}) {
@@ -15,15 +15,18 @@ export default function Sesion({navigation}) {
   //http://localhost/coffeeshop/api/services/public/cliente.php?action=signUpMovil
   
 
-      const ip = 'http://10.10.0.168';
+      //const ip = 'http://10.10.0.168';
+      const ip = 'http://192.168.1.2';
+      
       //const ipR = ip;
 
 
  const handlerLogin = async () => {
-    const formData = new FormData();
-    formData.append('correo', usuario);
-    formData.append('clave', contrasenia);
+
     try {
+      const formData = new FormData();
+      formData.append('correo', usuario);
+      formData.append('clave', contrasenia);
       //utilizar la direccion IP del servidor y no localhost
       const response = await fetch(`${ip}/coffeeshop/api/services/public/cliente.php?action=logIn`, {
         method: 'POST',
@@ -31,13 +34,14 @@ export default function Sesion({navigation}) {
       });
 
       const data = await response.json();
-
       if (data.status) {
-          navigation.navigate('Home');
+          //setContrasenia('')
+        //setUsuario('')
+          navigation.navigate('Productos');
       } else {
         console.log(data);
         // Alert the user about the error
-        Alert.alert('Error', data.error);
+        Alert.alert('Error sesion', data.error);
       }
     } catch (error) {
       console.error(error, "Error desde Catch");
@@ -75,7 +79,11 @@ export default function Sesion({navigation}) {
       setValor={contrasenia}
       setTextChange={setContrasenia}
       contra={isContra} />
-      <TouchableOpacity style={styles.button} onPress={handlerLogin}><Text style={styles.buttonText}>Iniciar Sesión</Text></TouchableOpacity>
+
+      <Buttons
+      textoBoton='Iniciar Sesión'
+      accionBoton={handlerLogin}/>
+
       <TouchableOpacity onPress={irRegistrar}><Text style={styles.textRegistrar}>Registrar Usuario</Text></TouchableOpacity>
     </View>
   );

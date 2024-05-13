@@ -5,6 +5,7 @@ import Home from './src/screens/Home.js'
 import Sesion from './src/screens/Sesion.js'
 import SignUp from './src/screens/SignUp.js'
 import UpdateUser from './src/screens/UpdateUser.js'
+import Productos from './src/screens/Productos.js';
 
 export default function App() {
 
@@ -14,18 +15,19 @@ export default function App() {
   return (
 
     <NavigationContainer>
-    <Stack.Navigator 
-    initialRouteName='SignUp'
+      <Stack.Navigator
+        initialRouteName='Productos'
 
-    screenOptions={{
-      headerShown: false
-    }}>
-      <Stack.Screen name="Sesion" component={Sesion} />
-      <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="SignUp" component={SignUp} />
-      <Stack.Screen name="UpdateUser" component={UpdateUser} />
-    </Stack.Navigator>
-  </NavigationContainer>
+        screenOptions={{
+          headerShown: false
+        }}>
+        <Stack.Screen name="Sesion" component={Sesion} />
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="SignUp" component={SignUp} />
+        <Stack.Screen name="UpdateUser" component={UpdateUser} />
+        <Stack.Screen name="Productos" component={Productos} />
+      </Stack.Navigator>
+    </NavigationContainer>
 
   );
 }
