@@ -5,14 +5,16 @@ import * as Constantes from '../utils/constantes'
 import Buttons from '../components/Buttons/Button';
 import ProductoCard from '../components/Productos/ProductoCard';
 import ModalCompra from '../components/Modales/ModalCompra';
+import RNPickerSelect from 'react-native-picker-select';
 
 export default function Productos({navigation}) {
 
     const ip = Constantes.IP;
     const [dataProductos, setDataProductos]=useState([])
     const [dataCategorias, setDataCategorias]=useState([])
+    const [selectedValue, setSelectedValue] = useState(null);
     const [cantidad, setCantidad] = useState('');
-    const [modalVisible, setModalVisible]=useState(true)
+    const [modalVisible, setModalVisible]=useState(false)
     const [idProductoModal, setIdProductoModal]=useState('')
     const [nombreProductoModal, setNombreProductoModal]=useState('')
 
@@ -29,17 +31,17 @@ export default function Productos({navigation}) {
 };
 
 const handleCompra = (nombre, id)=>{
-    setModalVisible(true)
+    setModalVisible(false)
     setIdProductoModal(id)
     setNombreProductoModal(nombre)
 }
 
 //getCategorias Funcion para consultar por medio de una peticion GET los datos de la tabla categoria que se encuentran en la base de datos
-const getProductos = async () => {
+const getProductos = async (idCategoriaSelect =4) => {
     try {
         
         const formData = new FormData();
-        formData.append('idCategoria', 4);
+        formData.append('idCategoria', idCategoriaSelect);
 
         //utilizar la direccion IP del servidor y no localhost
         const response = await fetch(`${ip}/coffeeshop/api/services/public/producto.php?action=readProductosCategoria`, {
@@ -65,19 +67,15 @@ const getProductos = async () => {
 const getCategorias = async () => {
     try {
         
-        const formData = new FormData();
-        formData.append('idCategoria', 4);
-
         //utilizar la direccion IP del servidor y no localhost
-        const response = await fetch(`${ip}/coffeeshop/api/services/public/producto.php?action=readProductosCategoria`, {
-            method: 'POST',
-            body: formData
+        const response = await fetch(`${ip}/coffeeshop/api/services/public/categoria.php?action=readAll`, {
+            method: 'GET',
         });
 
         const data = await response.json();
-        console.log("data al obtener productos  \n", data)
+        console.log("data al obtener categorias  \n", data)
         if (data.status) {
-            setDataCategorias(data.dataset)
+          setDataCategorias(data.dataset)
         } else {
             console.log(data);
             // Alert the user about the error
@@ -85,14 +83,19 @@ const getCategorias = async () => {
         }
     } catch (error) {
         console.error(error, "Error desde Catch");
-        Alert.alert('Error', 'Ocurrió un error al listar los productos');
+        Alert.alert('Error', 'Ocurrió un error al listar las categorias');
     }
 }
+
+const handleCategoriaChange = (itemValue, itemIndex) => {
+  setSelectedCategoria(itemValue);
+};
 
 //Uso del React Hook UseEffect para que cada vez que se cargue la vista por primera vez
 //se ejecute la funcion getCategorias
 useEffect(() => {
-    getProductos()
+    getProductos();
+    getCategorias();
 }, []);
 
 
@@ -116,6 +119,21 @@ cerrarModal={setModalVisible}
 nombreProductoModal={nombreProductoModal}
 idProductoModal={idProductoModal}
 />
+
+<View>
+  <Text>
+    Selecciona una categoria para filtar productos
+  </Text>
+  
+  <RNPickerSelect
+                 onValueChange={(value) => getProductos(value)}
+                 placeholder={{ label: 'Selecciona una categoria...', value: null }} // Cambia el valor del placeholder aquí
+                 items={dataCategorias.map(categoria => ({
+                  label: categoria.nombre_categoria,
+                  value: categoria.id_categoria
+                }))}
+                />
+</View>
 
 <SafeAreaView style={styles.containerFlat}>
 <FlatList

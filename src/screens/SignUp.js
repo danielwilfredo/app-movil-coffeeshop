@@ -2,14 +2,14 @@
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert, ScrollView } from 'react-native';
 import { useState } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
-
+import * as Constantes from '../utils/constantes'
 import Input from '../components/Inputs/Input'
 import InputMultiline from '../components/Inputs/InputMultiline'
 import Buttons from '../components/Buttons/Button';
 
 
 export default function SignUp({ navigation }) {
-    const ip = 'http://192.168.1.2';
+    const ip = Constantes.IP;
 
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
