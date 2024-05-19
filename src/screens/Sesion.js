@@ -18,13 +18,6 @@ export default function Sesion({navigation}) {
   //const [confirmarContrasenia, setConfirmarContrasenia] = useState('')
   //http://localhost/coffeeshop/api/services/public/cliente.php?action=signUpMovil
   
-
-      //const ip = 'http://10.10.0.168';
-      //const ip = 'http://192.168.1.2';
-      //const ip = 'http://192.168.137.65';
-      
-      //const ipR = ip;
-
       const cerrarSesion = async ()=>{
         try {
           const response = await fetch(`${ip}/coffeeshop/api/services/public/cliente.php?action=logOut`, {

@@ -6,6 +6,7 @@ import Sesion from './src/screens/Sesion.js'
 import SignUp from './src/screens/SignUp.js'
 import UpdateUser from './src/screens/UpdateUser.js'
 import Productos from './src/screens/Productos.js';
+import Carrito from './src/screens/Carrito.js';
 
 export default function App() {
 
@@ -26,6 +27,7 @@ export default function App() {
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="UpdateUser" component={UpdateUser} />
         <Stack.Screen name="Productos" component={Productos} />
+        <Stack.Screen name="Carrito" component={Carrito} />
       </Stack.Navigator>
     </NavigationContainer>
 

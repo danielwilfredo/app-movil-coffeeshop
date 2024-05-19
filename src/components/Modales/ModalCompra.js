@@ -25,7 +25,7 @@ const ModalCompra = ({ visible, cerrarModal, nombreProductoModal, idProductoModa
         <View style={styles.modalView}>
           <Text style={styles.modalText}>{nombreProductoModal}</Text>
           <Text style={styles.modalText}>Cantidad:</Text>
-          <TextInput
+          <TextInput  
             style={styles.input}
             value={cantidad}
             onChangeText={text => setCantidad(text)}
