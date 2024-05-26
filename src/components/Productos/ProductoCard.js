@@ -22,7 +22,7 @@ export default function ProductoCard({ip, imagenProducto, idProducto, nombreProd
        <Text style={styles.textTitle}>Precio: <Text style={styles.textDentro}>${precioProducto}</Text></Text>
        <Text style={styles.textTitle}>Existencias: <Text style={styles.textDentro}>{existenciasProducto} {(existenciasProducto===1) ?'Unidad':'Unidades'}</Text></Text>
        <TouchableOpacity style={styles.button} onPress={accionBotonProducto}>
-         <Text style={styles.buttonText}>Seleccionar Producto</Text>
+         <Text style={styles.buttonText}>Seleccionar Producto sdds</Text>
        </TouchableOpacity>
      </View>
 

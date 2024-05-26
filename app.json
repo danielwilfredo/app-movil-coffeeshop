@@ -7,13 +7,13 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/coffee-cup-splash.png",
+      "image": "./assets/coffeeshop-splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#EAD8C0"
     },
     "assetBundlePatterns": [
       "**/*"
-    ],
+    ],        
     "ios": {
       "supportsTablet": true
     },

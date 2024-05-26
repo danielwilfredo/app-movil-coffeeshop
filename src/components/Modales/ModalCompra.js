@@ -1,15 +1,91 @@
-import React, { useState } from 'react';
-import { View, Text, Modal, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
+import React, { useState, useEffect} from 'react';
+import { View, Text, Modal, StyleSheet, TouchableOpacity, TextInput, Alert } from 'react-native';
 import Buttons from '../Buttons/Button';
+import * as Constantes from '../../utils/constantes'
 
 const ModalCompra = ({ visible, cerrarModal, nombreProductoModal, idProductoModal }) => {
 
-  const [cantidad, setCantidad] = useState('');
+  const [cantidad, setCantidad] = useState(0);
+  const ip = Constantes.IP;
+/*
 
-  const handleAgregarAlCarrito = (idProducto) => {
+  useEffect(
+    ()=>{
+console.log(cantidad)
+console.log(idProductoModal)
+    },
+    [cantidad]
+  )*/
+
+  const handleAgregarAlCarrito = async () => {
+    // Lógica para agregar al carrito con la cantidad ingresada
+    try {
+      //http://localhost/coffeeshop/api/services/public/pedido.php?action=createDetail
+      const formData = new FormData();
+      formData.append('idProducto', idProductoModal);
+      formData.append('cantidadProducto', cantidad);
+
+      const response = await fetch(`${ip}/coffeeshop/api/services/public/pedido.php?action=createDetail`, {
+        method: 'POST',
+        body: formData
+    });
+
+    
+    console.log("En el carrito", formData)
+
+    const data = await response.json();
+    if (data.status) {
+        Alert.alert('Datos Guardados correctamente al carrito');
+    } else {
+        Alert.alert('Error al agregar al carrito', data.error);
+    }
+    cerrarModal(false)
+    } catch (error) {
+    Alert.alert("Error en agregar al carrito", error)
+         
+    cerrarModal(false)
+    }
+  };
+
+  
+  const handleCreateDetail = async () => {
+
+    try {
+        //utilizar la direccion IP del servidor y no localhost
+
+        if ((cantidad<0)) {
+            Alert.alert("Debes llenar todos los campos")
+            return
+        }
+        else {
+            const formData = new FormData();
+            formData.append('idProducto', idProductoModal);
+            formData.append('cantidadProducto', cantidad);
+
+            const response = await fetch(`${ip}/coffeeshop/api/services/public/pedido.php?action=createDetail`, {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await response.json();
+            console.log("data despues del response", data);
+            if (data.status) {
+                Alert.alert('Datos Guardados correctamente');
+            } else {
+                Alert.alert('Error', data.error);
+            }
+        }
+
+    } catch (error) {
+        Alert.alert('Ocurrió un error al crear detalle');
+    }
+};
+
+  const handleCancelCarrito = () => {
     // Lógica para agregar al carrito con la cantidad ingresada
     cerrarModal(false)
   };
+  //logica para la compra del producto - agregar el producto al carrito
 
 
   return (
@@ -34,7 +110,10 @@ const ModalCompra = ({ visible, cerrarModal, nombreProductoModal, idProductoModa
           />
           <Buttons
           textoBoton='Agregar al carrito'
-          accionBoton={() => handleAgregarAlCarrito(idProductoModal)}/>
+          accionBoton={() => handleCreateDetail()}/>
+                    <Buttons
+          textoBoton='Cancelar'
+          accionBoton={() => handleCancelCarrito()}/>
         </View>
       </View>
     </Modal>

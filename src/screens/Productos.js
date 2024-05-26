@@ -39,7 +39,7 @@ export default function Productos({ navigation }) {
   }
 
   //getCategorias Funcion para consultar por medio de una peticion GET los datos de la tabla categoria que se encuentran en la base de datos
-  const getProductos = async (idCategoriaSelect = 4) => {
+  const getProductos = async (idCategoriaSelect = 8) => {
     try {
 
       const formData = new FormData();

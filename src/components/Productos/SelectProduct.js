@@ -112,3 +112,67 @@ const styles = StyleSheet.create({
       }
   });
 
+// Realizar una solicitud GET
+fetch('https://jsonplaceholder.typicode.com/posts')
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json(); // Convertir la respuesta a JSON
+  })
+  .then(data => {
+    console.log(data); // Manejo de los datos obtenidos
+  })
+  .catch(error => {
+    console.error('Hubo un problema con la solicitud Fetch:', error);
+  });
+
+
+  // Realizar una solicitud POST
+fetch('https://jsonplaceholder.typicode.com/posts', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    title: 'foo',
+    body: 'bar',
+    userId: 1
+  })
+})
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json(); // Convertir la respuesta a JSON
+  })
+  .then(data => {
+    console.log(data); // Manejo de los datos obtenidos
+  })
+  .catch(error => {
+    console.error('Hubo un problema con la solicitud Fetch:', error);
+  });
+
+
+
+  // Realizar una solicitud GET
+axios.get('https://jsonplaceholder.typicode.com/posts')
+.then(response => {
+  console.log(response.data); // Manejo de los datos obtenidos
+})
+.catch(error => {
+  console.error('Error al realizar la solicitud:', error);
+});
+
+// Realizar una solicitud POST
+axios.post('https://jsonplaceholder.typicode.com/posts', {
+  title: 'foo',
+  body: 'bar',
+  userId: 1
+})
+  .then(response => {
+    console.log(response.data); // Manejo de los datos obtenidos
+  })
+  .catch(error => {
+    console.error('Error al realizar la solicitud:', error);
+  });
