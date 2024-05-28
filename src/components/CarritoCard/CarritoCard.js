@@ -35,13 +35,15 @@ const CarritoCard = ({item, cargarCategorias}) => {
     <Text style={styles.itemText}>Nombre: {item.nombre_producto}</Text>
     <Text style={styles.itemText}>Precio: ${item.precio_producto}</Text>
     <Text style={styles.itemText}>Cantidad: {item.cantidad_producto}</Text>
+    <Text style={styles.itemText}>SubTotal: ${(parseFloat(item.cantidad_producto)*parseFloat(item.precio_producto)).toFixed(2)}</Text>
+
     <TouchableOpacity style={styles.modifyButton}>
       <Text style={styles.buttonText}>Modificar Cantidad</Text>
     </TouchableOpacity>
     <TouchableOpacity style={styles.deleteButton}
     onLongPress={()=>handleDeleteDetalleCarrito(item.id_detalle)}
     >
-      <Text style={styles.buttonText}>Elimina</Text>
+      <Text style={styles.buttonText}>Eliminar del carrito</Text>
     </TouchableOpacity>
   </View>
 

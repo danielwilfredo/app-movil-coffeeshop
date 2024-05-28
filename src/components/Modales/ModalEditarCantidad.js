@@ -3,20 +3,12 @@ import { View, Text, Modal, StyleSheet, TouchableOpacity, TextInput, Alert } fro
 import Buttons from '../Buttons/Button';
 import * as Constantes from '../../utils/constantes'
 
-const ModalCompra = ({ visible, cerrarModal, nombreProductoModal, idProductoModal, cantidad, setCantidad}) => {
+const ModalEditarCantidad = ({ visible, cerrarModal, idDetalle, cantidadDetalle, setCantidadDetalle }) => {
 
+  
   const ip = Constantes.IP;
-/*
 
-  useEffect(
-    ()=>{
-console.log(cantidad)
-console.log(idProductoModal)
-    },
-    [cantidad]
-  )*/
-
-  const handleAgregarAlCarrito = async () => {
+  const handleUpdateDetalleCarrito = async () => {
     // Lógica para agregar al carrito con la cantidad ingresada
     try {
       //http://localhost/coffeeshop/api/services/public/pedido.php?action=createDetail
@@ -168,4 +160,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ModalCompra;
+export default ModalEditarCantidad;

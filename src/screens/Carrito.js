@@ -29,7 +29,7 @@ const Carrito = ({ navigation }) => {
         setDataDetalleCarrito(data.dataset);
       } else {
         console.log(data);
-        Alert.alert('Error', data.error);
+        Alert.alert('ADVERTENCIA', data.error);
       }
     } catch (error) {
       console.error(error, "Error desde Catch");
@@ -37,6 +37,26 @@ const Carrito = ({ navigation }) => {
     }
   };
 
+  const finalizarPedido = async () => {
+    try {
+      const response = await fetch(`${ip}/coffeeshop/api/services/public/pedido.php?action=finishOrder`, {
+        method: 'GET',
+      });
+
+      const data = await response.json();
+      console.log("data al obtener detalle carrito  \n", data);
+      if (data.status) {
+        Alert.alert("Se finalizo la compra correctamente")
+        navigation.navigate('Productos');
+      } else {
+        console.log(data);
+        Alert.alert('Error', data.error);
+      }
+    } catch (error) {
+      Alert.alert('Error', 'Ocurrió un error al finalizar pedido');
+    }
+  };
+  
   const renderItem = ({ item }) => (
     <CarritoCard item={item} cargarCategorias={getDetalleCarrito} />
   );
@@ -56,7 +76,7 @@ const Carrito = ({ navigation }) => {
       <View style={styles.containerButtons}>
         <Buttons
           textoBoton='Finalizar Pedido'
-          accionBoton={backProducts} />
+          accionBoton={finalizarPedido} />
         <Buttons
           textoBoton='Regresar a productos'
           accionBoton={backProducts} />

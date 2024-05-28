@@ -107,7 +107,7 @@ export default function Productos({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text>Seccion de Productos</Text>
+<Text style={styles.title}>Catalogo de Productos</Text>
       <Buttons
         textoBoton='Cerrar Sesión'
         accionBoton={volverLogin}
@@ -123,6 +123,8 @@ export default function Productos({ navigation }) {
         cerrarModal={setModalVisible}
         nombreProductoModal={nombreProductoModal}
         idProductoModal={idProductoModal}
+        cantidad={cantidad}
+        setCantidad={setCantidad}
       />
 
       <View>
@@ -239,6 +241,13 @@ const styles = StyleSheet.create({
     alignItems: 'center', // Centrar imagen horizontalmente
   }, textDentro: {
     fontWeight: '400'
-  }
+  }, 
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginVertical: 16,
+    color: '#5C3D2E', // Brown color for the title
+  },
 });
 

@@ -47,14 +47,12 @@ export default function Sesion({navigation}) {
       formData.append('correo', usuario);
       formData.append('clave', contrasenia);
       //utilizar la direccion IP del servidor y no localhost
-      console.error(formData, "valor formdata");
       const response = await fetch(`${ip}/coffeeshop/api/services/public/cliente.php?action=logIn`, {
         method: 'POST',
         body: formData
       });
       
       const data = await response.json();
-      console.error(data, "valor data.response");
       if (data.status) {
           //setContrasenia('')
         //setUsuario('')
