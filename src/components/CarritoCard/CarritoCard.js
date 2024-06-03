@@ -3,9 +3,18 @@ import { Text, TouchableOpacity, View, StyleSheet, FlatList, Alert } from 'react
 import Constants from 'expo-constants';
 import * as Constantes from '../../utils/constantes'
 
-const CarritoCard = ({item, cargarCategorias}) => {
+const CarritoCard = ({item, cargarCategorias, 
+  modalVisible,
+  setModalVisible,
+  cantidadProductoCarrito,
+  setCantidadProductoCarrito, 
+  accionBotonDetalle,
+  idDetalle,
+  setIdDetalle, getDetalleCarrito}) => {
 
     const ip = Constantes.IP;
+    //asignar el valor a cantidadproducto carrito que viene 
+  
 
     const handleDeleteDetalleCarrito = async (idDetalle) => {
         // Lógica para agregar al carrito con la cantidad ingresada
@@ -31,15 +40,19 @@ const CarritoCard = ({item, cargarCategorias}) => {
 
   return (
     <View style={styles.itemContainer}>
+
     <Text style={styles.itemText}>ID: {item.id_detalle}</Text>
     <Text style={styles.itemText}>Nombre: {item.nombre_producto}</Text>
     <Text style={styles.itemText}>Precio: ${item.precio_producto}</Text>
     <Text style={styles.itemText}>Cantidad: {item.cantidad_producto}</Text>
     <Text style={styles.itemText}>SubTotal: ${(parseFloat(item.cantidad_producto)*parseFloat(item.precio_producto)).toFixed(2)}</Text>
 
-    <TouchableOpacity style={styles.modifyButton}>
+    <TouchableOpacity style={styles.modifyButton}
+    onPress={()=>accionBotonDetalle(item.id_detalle, item.cantidad_producto)}
+    >
       <Text style={styles.buttonText}>Modificar Cantidad</Text>
     </TouchableOpacity>
+
     <TouchableOpacity style={styles.deleteButton}
     onLongPress={()=>handleDeleteDetalleCarrito(item.id_detalle)}
     >

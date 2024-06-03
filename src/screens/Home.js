@@ -70,7 +70,7 @@ export default function Home({navigation}) {
       </Text>
       <Buttons
       textoBoton='Cerrar Sesión'
-      accionBoton={getUser}
+      accionBoton={handleLogout}
       />
       
       <Buttons

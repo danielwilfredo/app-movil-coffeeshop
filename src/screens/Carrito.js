@@ -4,9 +4,13 @@ import Constants from 'expo-constants';
 import * as Constantes from '../utils/constantes';
 import Buttons from '../components/Buttons/Button';
 import CarritoCard from '../components/CarritoCard/CarritoCard';
+import ModalEditarCantidad from '../components/Modales/ModalEditarCantidad';
 
 const Carrito = ({ navigation }) => {
   const [dataDetalleCarrito, setDataDetalleCarrito] = useState([]);
+  const [idDetalle, setIdDetalle]=useState(null)
+  const [cantidadProductoCarrito, setCantidadProductoCarrito]=useState(0)
+  const [modalVisible, setModalVisible] = useState(false)
   const ip = Constantes.IP;
 
   const backProducts = () => {
@@ -44,26 +48,54 @@ const Carrito = ({ navigation }) => {
       });
 
       const data = await response.json();
-      console.log("data al obtener detalle carrito  \n", data);
+      //console.log("data al obtener detalle carrito  \n", data);
       if (data.status) {
         Alert.alert("Se finalizo la compra correctamente")
         navigation.navigate('Productos');
       } else {
-        console.log(data);
+        //console.log(data);
         Alert.alert('Error', data.error);
       }
     } catch (error) {
       Alert.alert('Error', 'Ocurrió un error al finalizar pedido');
     }
   };
+
+  const handleEditarDetalle = (idDetalle, cantidadDetalle) => {
+    console.log("Valor que viene de carrito CarritoCard", cantidadDetalle)
+    setModalVisible(true)
+    setIdDetalle(idDetalle)
+    setCantidadProductoCarrito(cantidadDetalle)
+  }
   
   const renderItem = ({ item }) => (
-    <CarritoCard item={item} cargarCategorias={getDetalleCarrito} />
+    <CarritoCard item={item} 
+    cargarCategorias={getDetalleCarrito} 
+    modalVisible={modalVisible}
+    setModalVisible={setModalVisible}
+    setCantidadProductoCarrito={setCantidadProductoCarrito}
+    cantidadProductoCarrito={cantidadProductoCarrito}
+    idDetalle={idDetalle}
+    setIdDetalle={setIdDetalle}
+    accionBotonDetalle={handleEditarDetalle}
+    getDetalleCarrito={getDetalleCarrito}
+    />
   );
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Carrito de Compras</Text>
+      
+      <ModalEditarCantidad
+      setModalVisible={setModalVisible}
+      modalVisible={modalVisible}
+      idDetalle={idDetalle}
+      setIdDetalle={setIdDetalle}
+      setCantidadProductoCarrito={setCantidadProductoCarrito}
+      cantidadProductoCarrito={cantidadProductoCarrito}
+      getDetalleCarrito={getDetalleCarrito}
+      />
+
+    <Text style={styles.title}>Carrito de Compras</Text>
       {dataDetalleCarrito.length > 0 ? (
         <FlatList
           data={dataDetalleCarrito}
@@ -74,9 +106,14 @@ const Carrito = ({ navigation }) => {
         <Text>No hay detalles del carrito disponibles.</Text>
       )}
       <View style={styles.containerButtons}>
-        <Buttons
+        
+      {
+      //carga condicional del boton de finalizar pedido
+      dataDetalleCarrito.length > 0 &&         <Buttons
           textoBoton='Finalizar Pedido'
           accionBoton={finalizarPedido} />
+      }
+
         <Buttons
           textoBoton='Regresar a productos'
           accionBoton={backProducts} />

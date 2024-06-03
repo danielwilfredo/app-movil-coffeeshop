@@ -5,7 +5,6 @@ import { useState } from 'react';
 import Input from '../components/Inputs/Input'
 import Buttons from '../components/Buttons/Button';
 import * as Constantes from '../utils/constantes'
-//import ip from '../utils/constantes.js'
 
 export default function Sesion({navigation}) {
 
@@ -56,7 +55,7 @@ export default function Sesion({navigation}) {
       if (data.status) {
           //setContrasenia('')
         //setUsuario('')
-          navigation.navigate('Productos');
+          navigation.navigate('Home');
       } else {
         console.log(data);
         // Alert the user about the error
@@ -69,11 +68,6 @@ export default function Sesion({navigation}) {
     }
   };
 
-  /*
-  const handlerLogin = async () => {
-    navigation.navigate('Home');
-  };
-*/
   const irRegistrar = async () => {
     navigation.navigate('SignUp');
   };
@@ -108,7 +102,8 @@ export default function Sesion({navigation}) {
 
       <TouchableOpacity onPress={irRegistrar}><Text style={styles.textRegistrar}>Registrar Usuario</Text></TouchableOpacity>
 
-
+{//Boton de ayuda para finalizar la sesión
+}
       <Buttons
       textoBoton='Cerrar Sesion'
       accionBoton={cerrarSesion}/>

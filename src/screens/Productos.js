@@ -7,7 +7,7 @@ import ProductoCard from '../components/Productos/ProductoCard';
 import ModalCompra from '../components/Modales/ModalCompra';
 import RNPickerSelect from 'react-native-picker-select';
 import Constants from 'expo-constants';
-
+import { FontAwesome } from '@expo/vector-icons'; // Importamos el ícono
 
 export default function Productos({ navigation }) {
 
@@ -58,7 +58,7 @@ export default function Productos({ navigation }) {
       } else {
         console.log(data);
         // Alert the user about the error
-        Alert.alert('Error', data.error);
+        Alert.alert('Error productos', data.error);
       }
     } catch (error) {
       console.error(error, "Error desde Catch");
@@ -75,16 +75,14 @@ export default function Productos({ navigation }) {
       });
 
       const data = await response.json();
-      console.log("data al obtener categorias  \n", data)
       if (data.status) {
         setDataCategorias(data.dataset)
       } else {
         console.log(data);
         // Alert the user about the error
-        Alert.alert('Error', data.error);
+        Alert.alert('Error categorias', data.error);
       }
     } catch (error) {
-      console.error(error, "Error desde Catch");
       Alert.alert('Error', 'Ocurrió un error al listar las categorias');
     }
   }
@@ -162,8 +160,10 @@ export default function Productos({ navigation }) {
       </SafeAreaView>
 
       <TouchableOpacity
+        style={styles.cartButton}
         onPress={irCarrito}>
-        <Text>Ir al carrito</Text>
+        <FontAwesome name="shopping-cart" size={24} color="white" />
+        <Text style={styles.cartButtonText}>Ir al carrito</Text>
       </TouchableOpacity>
 
     </View>
@@ -180,7 +180,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#EAD8C0',
     alignItems: 'center',
     justifyContent: 'center',
-    //marginTop: StatusBar.currentHeight || 0, otra forma de utilizar el status bar
     paddingTop: Constants.statusBarHeight,
   },
   card: {
@@ -204,7 +203,8 @@ const styles = StyleSheet.create({
   },
   textTitle: {
     fontSize: 16,
-    marginBottom: 8, fontWeight: '700'
+    marginBottom: 8,
+    fontWeight: '700'
   },
   inputContainer: {
     flexDirection: 'row',
@@ -238,16 +238,31 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   imageContainer: {
-    alignItems: 'center', // Centrar imagen horizontalmente
-  }, textDentro: {
+    alignItems: 'center',
+  },
+  textDentro: {
     fontWeight: '400'
-  }, 
+  },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
     marginVertical: 16,
-    color: '#5C3D2E', // Brown color for the title
+    color: '#5C3D2E',
+  },
+  cartButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#AF8260',
+    borderRadius: 5,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    marginVertical: 10,
+  },
+  cartButtonText: {
+    color: '#ffffff',
+    fontSize: 16,
+    fontWeight: '600',
+    marginLeft: 10,
   },
 });
-

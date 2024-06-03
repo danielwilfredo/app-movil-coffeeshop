@@ -1,6 +1,11 @@
 
 import { StatusBar, StyleSheet, Text, View,TextInput, TouchableOpacity, Alert, FlatList, ScrollView, SafeAreaView, Image} from 'react-native';
 import { useState, useEffect} from 'react';
+import { FontAwesome } from '@expo/vector-icons'; // Importamos el ícono
+
+//recibimos por props la imagen del producto, nombre, precio y otras propiedades de productos para mostrarlas en el componente de 
+//productoCard
+
 
 export default function ProductoCard({ip, imagenProducto, idProducto, nombreProducto, descripcionProducto
     , precioProducto, existenciasProducto, accionBotonProducto
@@ -21,9 +26,12 @@ export default function ProductoCard({ip, imagenProducto, idProducto, nombreProd
        <Text style={styles.text}>{descripcionProducto}</Text>
        <Text style={styles.textTitle}>Precio: <Text style={styles.textDentro}>${precioProducto}</Text></Text>
        <Text style={styles.textTitle}>Existencias: <Text style={styles.textDentro}>{existenciasProducto} {(existenciasProducto===1) ?'Unidad':'Unidades'}</Text></Text>
-       <TouchableOpacity style={styles.button} onPress={accionBotonProducto}>
-         <Text style={styles.buttonText}>Seleccionar Producto sdds</Text>
-       </TouchableOpacity>
+       <TouchableOpacity
+        style={styles.cartButton}
+        onPress={accionBotonProducto}>
+        <FontAwesome name="plus-circle" size={24} color="white" />
+        <Text style={styles.cartButtonText}>Seleccionar Producto</Text>
+      </TouchableOpacity>
      </View>
 
     );
@@ -100,6 +108,23 @@ const styles = StyleSheet.create({
         alignItems: 'center', // Centrar imagen horizontalmente
       },textDentro:{
         fontWeight:'400'
-      }
+      },
+      cartButton: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent:'center',
+        backgroundColor: '#AF8260',
+        borderRadius: 5,
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        marginVertical: 10,
+      },
+      cartButtonText: {
+        color: '#ffffff',
+        fontSize: 16,
+        fontWeight: '600',
+        marginLeft: 10,
+        textAlign:'center'
+      },
   });
 
