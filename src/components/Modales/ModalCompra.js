@@ -6,52 +6,10 @@ import * as Constantes from '../../utils/constantes'
 const ModalCompra = ({ visible, cerrarModal, nombreProductoModal, idProductoModal, cantidad, setCantidad}) => {
 
   const ip = Constantes.IP;
-/*
 
-  useEffect(
-    ()=>{
-console.log(cantidad)
-console.log(idProductoModal)
-    },
-    [cantidad]
-  )*/
-
-  const handleAgregarAlCarrito = async () => {
-    // Lógica para agregar al carrito con la cantidad ingresada
-    try {
-      //http://localhost/coffeeshop/api/services/public/pedido.php?action=createDetail
-      const formData = new FormData();
-      formData.append('idProducto', idProductoModal);
-      formData.append('cantidadProducto', cantidad);
-
-      const response = await fetch(`${ip}/coffeeshop/api/services/public/pedido.php?action=createDetail`, {
-        method: 'POST',
-        body: formData
-    });
-
-    
-    console.log("En el carrito", formData)
-
-    const data = await response.json();
-    if (data.status) {
-        Alert.alert('Datos Guardados correctamente al carrito');
-    } else {
-        Alert.alert('Error al agregar al carrito', data.error);
-    }
-    cerrarModal(false)
-    } catch (error) {
-    Alert.alert("Error en agregar al carrito", error)
-         
-    cerrarModal(false)
-    }
-  };
-
-  
   const handleCreateDetail = async () => {
 
     try {
-        //utilizar la direccion IP del servidor y no localhost
-
         if ((cantidad<0)) {
             Alert.alert("Debes llenar todos los campos")
             return
@@ -70,6 +28,7 @@ console.log(idProductoModal)
             console.log("data despues del response", data);
             if (data.status) {
                 Alert.alert('Datos Guardados correctamente');
+                cerrarModal(false);
             } else {
                 Alert.alert('Error', data.error);
             }

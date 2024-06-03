@@ -129,7 +129,7 @@ export default function Productos({ navigation }) {
       />
 
       <View>
-        <Text>
+        <Text style={styles.subtitle}>
           Selecciona una categoria para filtar productos
         </Text>
 
@@ -267,5 +267,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
     marginLeft: 10,
+  },
+  subtitle: {
+    fontSize: 18,
+    fontWeight: '600',
+    marginVertical: 5,
+    marginHorizontal:5,
+    color: '#5C3D2E', // Brown color for the title
   },
 });
