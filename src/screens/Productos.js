@@ -41,10 +41,12 @@ export default function Productos({ navigation }) {
   //getCategorias Funcion para consultar por medio de una peticion GET los datos de la tabla categoria que se encuentran en la base de datos
   const getProductos = async (idCategoriaSelect = 8) => {
     try {
-
+      if(idCategoriaSelect<=0) //validar que vaya seleccionada una categoria de productos
+        {
+          return
+        }
       const formData = new FormData();
       formData.append('idCategoria', idCategoriaSelect);
-
       //utilizar la direccion IP del servidor y no localhost
       const response = await fetch(`${ip}/coffeeshop/api/services/public/producto.php?action=readProductosCategoria`, {
         method: 'POST',
@@ -54,9 +56,10 @@ export default function Productos({ navigation }) {
       const data = await response.json();
       console.log("data al obtener productos  \n", data)
       if (data.status) {
+        console.log("trae datos el dataset", data)
         setDataProductos(data.dataset)
       } else {
-        console.log(data);
+        console.log("Data en el ELSE error productos", data);
         // Alert the user about the error
         Alert.alert('Error productos', data.error);
       }
