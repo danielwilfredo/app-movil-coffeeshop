@@ -39,12 +39,12 @@ export default function Productos({ navigation }) {
   }
 
   //getCategorias Funcion para consultar por medio de una peticion GET los datos de la tabla categoria que se encuentran en la base de datos
-  const getProductos = async (idCategoriaSelect = 8) => {
+  const getProductos = async (idCategoriaSelect = 1) => {
     try {
-      if(idCategoriaSelect<=0) //validar que vaya seleccionada una categoria de productos
-        {
-          return
-        }
+      if (idCategoriaSelect <= 0) //validar que vaya seleccionada una categoria de productos
+      {
+        return
+      }
       const formData = new FormData();
       formData.append('idCategoria', idCategoriaSelect);
       //utilizar la direccion IP del servidor y no localhost
@@ -108,7 +108,7 @@ export default function Productos({ navigation }) {
 
   return (
     <View style={styles.container}>
-<Text style={styles.title}>Catalogo de Productos</Text>
+      <Text style={styles.title}>Catalogo de Productos</Text>
       <Buttons
         textoBoton='Cerrar Sesión'
         accionBoton={volverLogin}
@@ -133,14 +133,18 @@ export default function Productos({ navigation }) {
           Selecciona una categoria para filtar productos
         </Text>
 
-        <RNPickerSelect
-          onValueChange={(value) => getProductos(value)}
-          placeholder={{ label: 'Selecciona una categoria...', value: null }} // Cambia el valor del placeholder aquí
-          items={dataCategorias.map(categoria => ({
-            label: categoria.nombre_categoria,
-            value: categoria.id_categoria
-          }))}
-        />
+        <View style={styles.pickerContainer}>
+          <RNPickerSelect
+            style={{ inputAndroid: styles.picker }}
+            onValueChange={(value) => getProductos(value)}
+            placeholder={{ label: 'Selecciona una categoría...', value: null }}
+            items={dataCategorias.map(categoria => ({
+              label: categoria.nombre_categoria,
+              value: categoria.id_categoria,
+            }))}
+          />
+        </View>
+
       </View>
 
       <SafeAreaView style={styles.containerFlat}>
@@ -189,7 +193,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     borderRadius: 8,
     padding: 16,
-    marginVertical: 8,
+    marginVertical: 1,
     marginHorizontal: 16,
     shadowColor: '#000',
     shadowOffset: {
@@ -272,7 +276,19 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
     marginVertical: 5,
-    marginHorizontal:5,
+    marginHorizontal: 5,
     color: '#5C3D2E', // Brown color for the title
+  },
+  pickerContainer: {
+    borderWidth: 1,
+    borderColor: '#AF8260', // Color del borde
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    marginBottom: 10,
+    backgroundColor: '#AF8260', // Color de fondo
+  },
+  picker: {
+    color: '#ffffff'
   },
 });
