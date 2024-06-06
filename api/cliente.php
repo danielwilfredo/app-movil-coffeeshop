@@ -9,7 +9,7 @@ if (isset($_GET['action'])) {
     // Se instancia la clase correspondiente.
     $cliente = new ClienteData;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
-    $result = array('status' => 0, 'session' => 0, 'recaptcha' => 0, 'message' => null, 'error' => null, 'exception' => null, 'username' => null);
+    $result = array('status' => 0, 'session' => 0, 'recaptcha' => 0, 'message' => null, 'error' => null, 'exception' => null, 'username' => null, 'name' => null);
     // Se verifica si existe una sesión iniciada como cliente para realizar las acciones correspondientes.
     if (isset($_SESSION['idCliente'])) {
         $result['session'] = 1;
@@ -19,8 +19,11 @@ if (isset($_GET['action'])) {
                 if (isset($_SESSION['correoCliente'])) {
                     $result['status'] = 1;
                     $result['username'] = $_SESSION['correoCliente'];
-                } else {
+                    $result['name'] = $cliente->readOneCorreo($_SESSION['correoCliente']);
+                   }
+                   else {
                     $result['error'] = 'Correo de usuario indefinido';
+                    $result['name'] ='No se pudo obtener el usuario';
                 }
                 break;
             case 'logOut':
@@ -83,8 +86,6 @@ if (isset($_GET['action'])) {
                 break;
                 case 'signUpMovil':
                     $_POST = Validator::validateForm($_POST);
-                    
-  
                 if (
                         !$cliente->setNombre($_POST['nombreCliente']) or
                         !$cliente->setApellido($_POST['apellidoCliente']) or

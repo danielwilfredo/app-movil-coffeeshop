@@ -40,7 +40,6 @@ export default function Home({navigation}) {
     
           const data = await response.json();
     
-          console.log(data.username)
           console.log(data.name.nombre_cliente)
           if (data.status) {
            //codigo para mostrar el correo del usuario
