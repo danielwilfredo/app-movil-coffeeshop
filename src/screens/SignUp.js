@@ -117,7 +117,7 @@ export default function SignUp({ navigation }) {
                 formData.append('claveCliente', clave);
                 formData.append('confirmarClave', confirmarClave);
 
-               // console.log('Formato de la fecha: ', date)
+                // console.log('Formato de la fecha: ', date)
                 const response = await fetch(`${ip}/coffeeshop/api/services/public/cliente.php?action=signUpMovil`, {
                     method: 'POST',
                     body: formData
@@ -243,8 +243,8 @@ const styles = StyleSheet.create({
     },
     fechaSeleccionar: {
         fontWeight: '700',
-        color: '#322C2B', 
-        textDecorationLine:'underline'
+        color: '#322C2B',
+        textDecorationLine: 'underline'
     },
     contenedorFecha: {
         backgroundColor: '#A79277',
@@ -255,3 +255,4 @@ const styles = StyleSheet.create({
         marginVertical: 10
     }
 });
+

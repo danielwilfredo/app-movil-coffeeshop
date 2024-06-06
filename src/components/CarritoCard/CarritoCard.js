@@ -10,32 +10,34 @@ const CarritoCard = ({item, cargarCategorias,
   setCantidadProductoCarrito, 
   accionBotonDetalle,
   idDetalle,
-  setIdDetalle, getDetalleCarrito}) => {
+  setIdDetalle, getDetalleCarrito, updateDataDetalleCarrito}) => {
 
     const ip = Constantes.IP;
     //asignar el valor a cantidadproducto carrito que viene 
   
 
     const handleDeleteDetalleCarrito = async (idDetalle) => {
-        // Lógica para agregar al carrito con la cantidad ingresada
-        try {
-          const formData = new FormData();
-          formData.append('idDetalle', idDetalle);
-          const response = await fetch(`${ip}/coffeeshop/api/services/public/pedido.php?action=deleteDetail`, {
-            method: 'POST',
-            body: formData
+      try {
+        const formData = new FormData();
+        formData.append('idDetalle', idDetalle);
+        const response = await fetch(`${ip}/coffeeshop/api/services/public/pedido.php?action=deleteDetail`, {
+          method: 'POST',
+          body: formData
         });
         const data = await response.json();
         if (data.status) {
-            Alert.alert('Datos elimnados correctamente del carrito');
-            cargarCategorias();
+          Alert.alert('Datos eliminados correctamente del carrito');
+          // Llamar a la función de actualización para actualizar la lista
+          updateDataDetalleCarrito(prevData => prevData.filter(item => item.id_detalle !== idDetalle));
         } else {
-            Alert.alert('Error al agregar al carrito', data.error);
+          Alert.alert('Error al eliminar del carrito', data.error);
         }
-        } catch (error) {
-        Alert.alert("Error en agregar al carrito")
-        }
-      };
+      } catch (error) {
+        Alert.alert("Error al eliminar del carrito")
+      }
+    };
+    
+      
     
 
   return (
