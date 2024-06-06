@@ -130,3 +130,12 @@ if (isset($_GET['action'])) {
 } else {
     print(json_encode('Recurso no disponible'));
 }
+
+public function readOneCorreo($correo)
+{
+    $sql = 'SELECT id_cliente, nombre_cliente, apellido_cliente, correo_cliente, dui_cliente, telefono_cliente, nacimiento_cliente, direccion_cliente, estado_cliente
+            FROM cliente
+            WHERE correo_cliente = ?';
+    $params = array($correo);
+    return Database::getRow($sql, $params);
+}
