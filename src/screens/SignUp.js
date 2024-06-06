@@ -6,6 +6,8 @@ import * as Constantes from '../utils/constantes'
 import Input from '../components/Inputs/Input'
 import InputMultiline from '../components/Inputs/InputMultiline'
 import Buttons from '../components/Buttons/Button';
+import MaskedInputTelefono from '../components/Inputs/MaskedInputTelefono';
+import MaskedInputDui from '../components/Inputs/MaskedInputDui';
 
 
 export default function SignUp({ navigation }) {
@@ -205,11 +207,9 @@ export default function SignUp({ navigation }) {
                     setValor={setDireccion}
                     valor={direccion}
                     setTextChange={setDireccion} />
-                <Input
-                    placeHolder='Dui Cliente'
-                    setValor={dui}
-                    setTextChange={setDui} />
-
+                <MaskedInputDui
+                    dui={dui}
+                    setDui={setDui} />
                 <View style={styles.contenedorFecha}>
                     <Text style={styles.fecha}>Fecha Nacimiento</Text>
 
@@ -227,10 +227,9 @@ export default function SignUp({ navigation }) {
                     )}
                 </View>
 
-                <Input
-                    placeHolder='Telefono'
-                    setValor={telefono}
-                    setTextChange={setTelefono} />
+                <MaskedInputTelefono
+                    telefono={telefono}
+                    setTelefono={setTelefono} />
                 <Input
                     placeHolder='Clave'
                     contra={true}
