@@ -9,7 +9,7 @@ import Input from '../components/Inputs/Input'
 import InputMultiline from '../components/Inputs/InputMultiline'
 import Buttons from '../components/Buttons/Button';
 import MaskedInputTelefono from '../components/Inputs/MaskedInputTelefono';
-import MaskedInputDui from '../components/Inputs/MaskedInput Dui';
+import MaskedInputDui from '../components/Inputs/MaskedInputDui';
 
 
 export default function SignUp({ navigation }) {
