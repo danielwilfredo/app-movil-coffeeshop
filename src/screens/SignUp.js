@@ -3,11 +3,13 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert, ScrollView 
 import { useState } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import * as Constantes from '../utils/constantes'
+import Constants from 'expo-constants';
+//Import de componentes
 import Input from '../components/Inputs/Input'
 import InputMultiline from '../components/Inputs/InputMultiline'
 import Buttons from '../components/Buttons/Button';
 import MaskedInputTelefono from '../components/Inputs/MaskedInputTelefono';
-import MaskedInputDui from '../components/Inputs/MaskedInputDui';
+import MaskedInputDui from '../components/Inputs/MaskedInput Dui';
 
 
 export default function SignUp({ navigation }) {
@@ -262,9 +264,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#EAD8C0',
-        paddingTop: 20
-
-    },
+        paddingTop: Constants.statusBarHeight,
+      },
     scrollViewStyle: {
         alignItems: 'center',
         justifyContent: 'center'

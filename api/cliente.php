@@ -131,6 +131,8 @@ if (isset($_GET['action'])) {
     print(json_encode('Recurso no disponible'));
 }
 
+//Agregar esta función en el archivo handler.php de clientes
+
 public function readOneCorreo($correo)
 {
     $sql = 'SELECT id_cliente, nombre_cliente, apellido_cliente, correo_cliente, dui_cliente, telefono_cliente, nacimiento_cliente, direccion_cliente, estado_cliente
