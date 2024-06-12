@@ -56,6 +56,7 @@ export default function Sesion({navigation}) {
           //setContrasenia('')
         //setUsuario('')
           navigation.navigate('Home');
+          
       } else {
         console.log(data);
         // Alert the user about the error

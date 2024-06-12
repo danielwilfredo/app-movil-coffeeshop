@@ -117,7 +117,7 @@ export default function SignUp({ navigation }) {
                 formData.append('claveCliente', clave);
                 formData.append('confirmarClave', confirmarClave);
 
-                console.log('Formato de la fecha: ', date)
+               // console.log('Formato de la fecha: ', date)
                 const response = await fetch(`${ip}/coffeeshop/api/services/public/cliente.php?action=signUpMovil`, {
                     method: 'POST',
                     body: formData
@@ -142,8 +142,6 @@ export default function SignUp({ navigation }) {
 
     return (
         <View style={styles.container}>
-
-
             <ScrollView contentContainerStyle={styles.scrollViewStyle}>
                 <Text style={styles.texto}>Registrar Usuario</Text>
                 <Input
