@@ -1,4 +1,3 @@
-
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, TouchableOpacity, Alert } from 'react-native';
 import { useEffect, useState } from 'react';
@@ -7,15 +6,11 @@ import Buttons from '../components/Buttons/Button';
 import * as Constantes from '../utils/constantes'
 
 export default function Sesion({ navigation }) {
-
-
   const ip = Constantes.IP;
 
   const [isContra, setIsContra] = useState(true)
   const [usuario, setUsuario] = useState('')
   const [contrasenia, setContrasenia] = useState('')
-  //const [confirmarContrasenia, setConfirmarContrasenia] = useState('')
-  //http://localhost/coffeeshop/api/services/public/cliente.php?action=signUpMovil
 
   const validarSesion = async () => {
     try {
@@ -27,9 +22,9 @@ export default function Sesion({ navigation }) {
   
       if (data.status === 1) {
         cerrarSesion();
-        console.log("Se elimino la sesion")
+        console.log("Se eliminó la sesión")
       } else {
-        console.log("No hay sesion activa")
+        console.log("No hay sesión activa")
         return
       }
     } catch (error) {
@@ -37,9 +32,6 @@ export default function Sesion({ navigation }) {
       Alert.alert('Error', 'Ocurrió un error al validar la sesión');
     }
   }
-  
-
-
 
   const cerrarSesion = async () => {
     try {
@@ -50,7 +42,7 @@ export default function Sesion({ navigation }) {
       const data = await response.json();
 
       if (data.status) {
-        console.log("Sesion Finalizada")
+        console.log("Sesión Finalizada")
       } else {
         console.log('No se pudo eliminar la sesión')
       }
@@ -60,15 +52,12 @@ export default function Sesion({ navigation }) {
     }
   }
 
-
   const handlerLogin = async () => {
-
     try {
-
       const formData = new FormData();
       formData.append('correo', usuario);
       formData.append('clave', contrasenia);
-      //utilizar la direccion IP del servidor y no localhost
+
       const response = await fetch(`${ip}/coffeeshop/api/services/public/cliente.php?action=logIn`, {
         method: 'POST',
         body: formData
@@ -80,15 +69,12 @@ export default function Sesion({ navigation }) {
         setContrasenia('')
         setUsuario('')
         navigation.navigate('TabNavigator');
-
       } else {
         console.log(data);
-        // Alert the user about the error
-        Alert.alert('Error sesion', data.error);
+        Alert.alert('Error sesión', data.error);
       }
     } catch (error) {
       console.error(error, "Error desde Catch");
-
       Alert.alert('Error', 'Ocurrió un error al iniciar sesión');
     }
   };
@@ -99,17 +85,13 @@ export default function Sesion({ navigation }) {
 
   useEffect(() => { validarSesion() }, [])
 
-
-
   return (
     <View style={styles.container}>
       <Image
-        source={require('../img/coffee-cup.png')} // Ruta de la imagen dentro de la carpeta de activos
+        source={require('../img/coffee-cup.png')}
         style={styles.image}
       />
-
       <Text style={styles.texto}>Iniciar Sesión</Text>
-
       <Input
         placeHolder='Usuario'
         setValor={usuario}
@@ -120,21 +102,10 @@ export default function Sesion({ navigation }) {
         setValor={contrasenia}
         setTextChange={setContrasenia}
         contra={isContra} />
-
       <Buttons
         textoBoton='Iniciar Sesión'
         accionBoton={handlerLogin} />
-
-      <TouchableOpacity onPress={irRegistrar}><Text style={styles.textRegistrar}>Registrar Usuario</Text></TouchableOpacity>
-
-      {//Boton de ayuda para finalizar la sesión
-      /*
-            <Buttons
-        textoBoton='Cerrar Sesion'
-        accionBoton={cerrarSesion} />
-       */
-      }
-
+      <TouchableOpacity onPress={irRegistrar}><Text style={styles.textRegistrar}>¿No tienes cuenta? Regístrate aquí</Text></TouchableOpacity>
     </View>
   );
 }
@@ -145,20 +116,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#EAD8C0',
     alignItems: 'center',
     justifyContent: 'center',
-
-  },
-  button: {
-    borderWidth: 2,
-    borderColor: "#AF8260",
-    width: 150,
-    borderRadius: 10,
-    backgroundColor: "#AF8260",
-    padding: 10,
-    marginVertical: 10
-  },
-  buttonText: {
-    textAlign: 'center',
-    color: "#FFF", fontWeight: '800', textTransform: 'uppercase'
   },
   texto: {
     color: '#322C2B', fontWeight: '900',
@@ -166,7 +123,8 @@ const styles = StyleSheet.create({
   },
   textRegistrar: {
     color: '#322C2B', fontWeight: '700',
-    fontSize: 18
+    fontSize: 18,
+    marginTop: 10
   },
   image: {
     width: 75,
