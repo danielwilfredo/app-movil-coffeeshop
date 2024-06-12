@@ -7,6 +7,7 @@ import Buttons from '../components/Buttons/Button';
 
 export default function Home({navigation}) {
   const [correo, setCorreo]=useState(null)
+  const [nombre, setNombre]=useState(null)
 
 
   const ip = Constantes.IP;
@@ -39,9 +40,13 @@ export default function Home({navigation}) {
     
           const data = await response.json();
     
-          console.log(data.username)
+          console.log(data.name.nombre_cliente)
           if (data.status) {
-           setCorreo(data.username)
+           //codigo para mostrar el correo del usuario
+            //setCorreo(data.username)
+            //codigo para mostrar el nombre del usuario
+           setNombre(data.name.nombre_cliente)
+           
           } else {
             console.log(data);
             // Alert the user about the error
@@ -66,7 +71,8 @@ export default function Home({navigation}) {
     <View style={styles.container}>
       <Text style={styles.title}>Bienvenid@</Text>
       <Text style={styles.subtitle}> 
-        {correo ? correo : 'No hay correo para mostrar'}
+        { /*correo ? correo : 'No hay correo para mostrar'*/}
+        {nombre ? nombre : 'No hay Nombre para mostrar'}
       </Text>
       <Buttons
       textoBoton='Cerrar Sesión'

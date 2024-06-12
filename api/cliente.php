@@ -9,7 +9,7 @@ if (isset($_GET['action'])) {
     // Se instancia la clase correspondiente.
     $cliente = new ClienteData;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
-    $result = array('status' => 0, 'session' => 0, 'recaptcha' => 0, 'message' => null, 'error' => null, 'exception' => null, 'username' => null);
+    $result = array('status' => 0, 'session' => 0, 'recaptcha' => 0, 'message' => null, 'error' => null, 'exception' => null, 'username' => null, 'name' => null);
     // Se verifica si existe una sesión iniciada como cliente para realizar las acciones correspondientes.
     if (isset($_SESSION['idCliente'])) {
         $result['session'] = 1;
@@ -19,8 +19,11 @@ if (isset($_GET['action'])) {
                 if (isset($_SESSION['correoCliente'])) {
                     $result['status'] = 1;
                     $result['username'] = $_SESSION['correoCliente'];
-                } else {
+                    $result['name'] = $cliente->readOneCorreo($_SESSION['correoCliente']);
+                   }
+                   else {
                     $result['error'] = 'Correo de usuario indefinido';
+                    $result['name'] ='No se pudo obtener el usuario';
                 }
                 break;
             case 'logOut':
@@ -130,4 +133,15 @@ if (isset($_GET['action'])) {
     print(json_encode($result));
 } else {
     print(json_encode('Recurso no disponible'));
+}
+
+//Agregar esta función en el archivo handler.php de clientes
+
+public function readOneCorreo($correo)
+{
+    $sql = 'SELECT id_cliente, nombre_cliente, apellido_cliente, correo_cliente, dui_cliente, telefono_cliente, nacimiento_cliente, direccion_cliente, estado_cliente
+            FROM cliente
+            WHERE correo_cliente = ?';
+    $params = array($correo);
+    return Database::getRow($sql, $params);
 }

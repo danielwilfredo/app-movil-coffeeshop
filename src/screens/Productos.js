@@ -21,10 +21,25 @@ export default function Productos({ navigation }) {
   const [nombreProductoModal, setNombreProductoModal] = useState('')
 
   const volverLogin = async () => {
+    try {
+      const response = await fetch(`${ip}/coffeeshop/api/services/public/cliente.php?action=logOut`, {
+        method: 'GET'
+      });
 
-    navigation.navigate('Sesion');
+      const data = await response.json();
 
-  };
+      if (data.status) {
+        Alert.alert("Sesion Finalizada")
+      } else {
+        console.log(data);
+        // Alert the user about the error
+        Alert.alert('Error', data.error);
+      }
+    } catch (error) {
+      console.error(error, "Error desde Catch");
+      Alert.alert('Error', 'Ocurrió un error al iniciar sesión con bryancito');
+    }
+  }
 
   const volverInicio = async () => {
 
