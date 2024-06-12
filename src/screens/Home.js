@@ -67,6 +67,11 @@ export default function Home({navigation}) {
     navigation.navigate('Productos');
   };
 
+  const EditUser = async () => {
+    navigation.navigate('UpdateUser');
+  };
+
+
  return (
     <View style={styles.container}>
       <Text style={styles.title}>Bienvenid@</Text>
@@ -83,7 +88,10 @@ export default function Home({navigation}) {
       textoBoton='Ver Productos'
       accionBoton={irActualizar}
       />
-
+      <Buttons
+      textoBoton='Editar Usuario'
+      accionBoton={EditUser}
+      />
     </View>
   );
 }

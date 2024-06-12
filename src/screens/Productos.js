@@ -20,6 +20,8 @@ export default function Productos({ navigation }) {
   const [idProductoModal, setIdProductoModal] = useState('')
   const [nombreProductoModal, setNombreProductoModal] = useState('')
 
+  /*
+  Ahorita no se ocupa este codigo
   const volverLogin = async () => {
     try {
       const response = await fetch(`${ip}/coffeeshop/api/services/public/cliente.php?action=logOut`, {
@@ -39,7 +41,7 @@ export default function Productos({ navigation }) {
       console.error(error, "Error desde Catch");
       Alert.alert('Error', 'Ocurrió un error al iniciar sesión con bryancito');
     }
-  }
+  }*/
 
   const volverInicio = async () => {
 
@@ -124,10 +126,6 @@ export default function Productos({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Catalogo de Productos</Text>
-      <Buttons
-        textoBoton='Cerrar Sesión'
-        accionBoton={volverLogin}
-      />
 
       <Buttons
         textoBoton='Volver a Home'

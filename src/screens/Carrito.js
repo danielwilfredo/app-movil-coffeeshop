@@ -1,6 +1,11 @@
 // Importaciones necesarias
 import React, { useEffect, useState } from 'react';
 import { Text, View, StyleSheet, FlatList, Alert } from 'react-native';
+
+import { useFocusEffect } from '@react-navigation/native';
+// Importa la función useFocusEffect de @react-navigation/native, 
+// que permite ejecutar un efecto cada vez que la pantalla se enfoca.
+
 import Constants from 'expo-constants';
 import * as Constantes from '../utils/constantes';
 import Buttons from '../components/Buttons/Button';
@@ -24,10 +29,13 @@ const Carrito = ({ navigation }) => {
     navigation.navigate('Productos');
   };
 
-  // Efecto para cargar los detalles del carrito al cargar la pantalla
-  useEffect(() => {
-    getDetalleCarrito();
-  }, []);
+  // Efecto para cargar los detalles del carrito al cargar la pantalla o al enfocarse en ella
+  useFocusEffect(
+    // La función useFocusEffect ejecuta un efecto cada vez que la pantalla se enfoca.
+    React.useCallback(() => {
+      getDetalleCarrito(); // Llama a la función getDetalleCarrito.
+    }, [])
+  );
 
   // Función para obtener los detalles del carrito desde el servidor
   const getDetalleCarrito = async () => {
@@ -36,10 +44,12 @@ const Carrito = ({ navigation }) => {
         method: 'GET',
       });
       const data = await response.json();
+      console.log(data, "Data desde getDetalleCarrito")
       if (data.status) {
         setDataDetalleCarrito(data.dataset);
       } else {
-        Alert.alert('ADVERTENCIA', data.error);
+        console.log("No hay detalles del carrito disponibles")
+        //Alert.alert('ADVERTENCIA', data.error);
       }
     } catch (error) {
       console.error(error, "Error desde Catch");
@@ -56,7 +66,8 @@ const Carrito = ({ navigation }) => {
       const data = await response.json();
       if (data.status) {
         Alert.alert("Se finalizó la compra correctamente")
-        navigation.navigate('Productos');
+        setDataDetalleCarrito([]); // Limpia la lista de detalles del carrito
+        navigation.navigate('TabNavigator', { screen: 'Productos' });
       } else {
         Alert.alert('Error', data.error);
       }
@@ -113,7 +124,7 @@ const Carrito = ({ navigation }) => {
           keyExtractor={(item) => item.id_detalle.toString()}
         />
       ) : (
-        <Text>No hay detalles del carrito disponibles.</Text>
+        <Text style={styles.titleDetalle}>No hay detalles del carrito disponibles.</Text>
       )}
 
       {/* Botones de finalizar pedido y regresar a productos */}
@@ -146,6 +157,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: 'bold',
+    textAlign: 'center',
+    marginVertical: 16,
+    color: '#5C3D2E',
+  },
+  titleDetalle: {
+    fontSize: 20,
+    fontWeight: '600',
     textAlign: 'center',
     marginVertical: 16,
     color: '#5C3D2E',

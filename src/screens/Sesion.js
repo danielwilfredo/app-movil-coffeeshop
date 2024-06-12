@@ -1,7 +1,7 @@
 
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, TouchableOpacity, Alert } from 'react-native';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Input from '../components/Inputs/Input'
 import Buttons from '../components/Buttons/Button';
 import * as Constantes from '../utils/constantes'
@@ -17,6 +17,30 @@ export default function Sesion({ navigation }) {
   //const [confirmarContrasenia, setConfirmarContrasenia] = useState('')
   //http://localhost/coffeeshop/api/services/public/cliente.php?action=signUpMovil
 
+  const validarSesion = async () => {
+    try {
+      const response = await fetch(`${ip}/coffeeshop/api/services/public/cliente.php?action=getUser`, {
+        method: 'GET'
+      });
+  
+      const data = await response.json();
+  
+      if (data.status === 1) {
+        cerrarSesion();
+        console.log("Se elimino la sesion")
+      } else {
+        console.log("No hay sesion activa")
+        return
+      }
+    } catch (error) {
+      console.error(error);
+      Alert.alert('Error', 'Ocurrió un error al validar la sesión');
+    }
+  }
+  
+
+
+
   const cerrarSesion = async () => {
     try {
       const response = await fetch(`${ip}/coffeeshop/api/services/public/cliente.php?action=logOut`, {
@@ -26,11 +50,9 @@ export default function Sesion({ navigation }) {
       const data = await response.json();
 
       if (data.status) {
-        Alert.alert("Sesion Finalizada")
+        console.log("Sesion Finalizada")
       } else {
-        console.log(data);
-        // Alert the user about the error
-        Alert.alert('Error', data.error);
+        console.log('No se pudo eliminar la sesión')
       }
     } catch (error) {
       console.error(error, "Error desde Catch");
@@ -57,7 +79,7 @@ export default function Sesion({ navigation }) {
       if (data.status) {
         setContrasenia('')
         setUsuario('')
-        navigation.navigate('Home');
+        navigation.navigate('TabNavigator');
 
       } else {
         console.log(data);
@@ -74,6 +96,8 @@ export default function Sesion({ navigation }) {
   const irRegistrar = async () => {
     navigation.navigate('SignUp');
   };
+
+  useEffect(() => { validarSesion() }, [])
 
 
 
@@ -104,10 +128,13 @@ export default function Sesion({ navigation }) {
       <TouchableOpacity onPress={irRegistrar}><Text style={styles.textRegistrar}>Registrar Usuario</Text></TouchableOpacity>
 
       {//Boton de ayuda para finalizar la sesión
-      }
-      <Buttons
+      /*
+            <Buttons
         textoBoton='Cerrar Sesion'
         accionBoton={cerrarSesion} />
+       */
+      }
+
     </View>
   );
 }
