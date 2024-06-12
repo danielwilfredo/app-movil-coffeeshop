@@ -12,56 +12,38 @@ const Tab = createBottomTabNavigator();
 const TabNavigator = () => {
     return (
         <Tab.Navigator
-          screenOptions={{
+          screenOptions={({ route }) => ({
+            headerShown: false, // Oculta el header
             tabBarActiveTintColor: '#AF8260', // Color de los íconos activos
             tabBarInactiveTintColor: '#B99873', // Color de los íconos inactivos
-            tabBarStyle: { display: 'flex' }, // Asegura que la barra de pestañas se muestre correctamente
-          }}
+            tabBarStyle: { backgroundColor: '#FFF', height: 60, borderTopWidth: 0 }, // Estilo de la barra de pestañas
+            tabBarIcon: ({ focused, color, size }) => { // Función que define el ícono de la pestaña
+              let iconName;
+              if (route.name === 'Home') {
+                iconName = focused ? 'home' : 'home-outline';
+              } else if (route.name === 'Productos') {
+                iconName = focused ? 'cafe' : 'cafe-outline';
+              } else if (route.name === 'Carrito') {
+                iconName = focused ? 'cart' : 'cart-outline';
+              }
+              return <Ionicons name={iconName} color={color} size={size} />;
+            },
+          })}
         >
           <Tab.Screen
             name="Home"
             component={Home}
-            options={{
-              title: 'Inicio',
-              headerStyle: {
-                backgroundColor: '#EAD8C0', // Color del header
-              },
-              headerTintColor: '#000', // Color del texto en el header
-              headerShown: false, // Oculta el header
-              tabBarIcon: ({ color }) => ( // Función que define el ícono de la pestaña
-                <Ionicons name="home" color={color} size={24} /> // Usar el color dinámico proporcionado por React Navigation
-              ),
-            }}
+            options={{ title: 'Inicio' }}
           />
           <Tab.Screen
             name="Productos"
             component={Productos}
-            options={{
-              title: 'Productos',
-              headerStyle: {
-                backgroundColor: '#FFC300', // Color del header
-              },
-              headerShown: false, // Oculta el header
-              headerTintColor: '#fff', // Color del texto en el header
-              tabBarIcon: ({ color }) => ( // Función que define el ícono de la pestaña
-                <Ionicons name="cafe" color={color} size={24} /> // Usar el color dinámico proporcionado por React Navigation
-              ),
-            }}
+            options={{ title: 'Productos' }}
           />
           <Tab.Screen
             name="Carrito"
             component={Carrito}
-            options={{
-              title: 'Carrito',
-              headerStyle: {
-                backgroundColor: '#FFC300', // Color del header
-              },
-              headerShown: false, // Oculta el header
-              headerTintColor: '#fff', // Color del texto en el header
-              tabBarIcon: ({ color }) => ( // Función que define el ícono de la pestaña
-                <Ionicons name="cart" color={color} size={24} /> // Usar el color dinámico proporcionado por React Navigation
-              ),
-            }}
+            options={{ title: 'Carrito' }}
           />
         </Tab.Navigator>
     );
