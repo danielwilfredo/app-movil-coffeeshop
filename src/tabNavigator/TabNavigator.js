@@ -1,72 +1,18 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { AnimatedTabBarNavigator } from "react-native-animated-nav-tab-bar";
 
 // Importa tus componentes de pantalla aquí
 import Productos from '../screens/Productos';
 import Home from '../screens/Home';
 import Carrito from '../screens/Carrito';
 
-//const Tab = createBottomTabNavigator();
-const Tab = AnimatedTabBarNavigator();
+const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
     return (
-      <Tab.Navigator
 
-      appearance={dotCornerRadius=10    }
-
-       screenOptions={({ route }) => ({
-        tabBarActiveTintColor: '#AF8260', // Color de los íconos activos
-        tabBarInactiveTintColor: '#B99873', // Color de los íconos inactivos
-        tabBarIcon: ({ focused, color, size }) => { // Función que define el ícono de la pestaña
-          let iconName;
-          if (route.name === 'Home') {
-            iconName = focused ? 'home' : 'home-outline';
-          } else if (route.name === 'Productos') {
-            iconName = focused ? 'cafe' : 'cafe-outline';
-          } else if (route.name === 'Carrito') {
-            iconName = focused ? 'cart' : 'cart-outline';
-          }
-          return <Ionicons name={iconName} color={color} size={size} />;
-        },
-      })}
-      // default configuration from React Navigation
-      tabBarOptions={{
-        activeTintColor: "#FFF",
-        inactiveTintColor: "#B99873",
-        activeBackgroundColor: "#B99873",}}
-            >
-
-
-<Tab.Screen
-            name="Home"
-            component={Home}
-            options={{ title: 'Inicio' }}
-          />
-          <Tab.Screen
-            name="Productos"
-            component={Productos}
-            options={{ title: 'Productos' }}
-          />
-          <Tab.Screen
-            name="Carrito"
-            component={Carrito}
-            options={{ title: 'Carrito' }}
-          />
-
-
-  </Tab.Navigator>
-
-    );
-};
-
-export default TabNavigator;
-
-
-/*
- <Tab.Navigator
+<Tab.Navigator
       screenOptions={({ route }) => ({
         headerShown: false, // Oculta el header
         tabBarActiveTintColor: '#AF8260', // Color de los íconos activos
@@ -101,4 +47,8 @@ export default TabNavigator;
         options={{ title: 'Carrito' }}
       />
     </Tab.Navigator>
-*/
+    );
+};
+
+export default TabNavigator;
+
