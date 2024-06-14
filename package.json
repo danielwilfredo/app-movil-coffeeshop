@@ -21,6 +21,7 @@
     "react": "18.2.0",
     "react-google-recaptcha": "^3.1.0",
     "react-native": "0.73.6",
+    "react-native-animated-nav-tab-bar": "^3.1.10",
     "react-native-datepicker": "^1.7.2",
     "react-native-masked-text": "^1.13.0",
     "react-native-picker-select": "^9.1.3",
