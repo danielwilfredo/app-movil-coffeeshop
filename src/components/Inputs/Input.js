@@ -1,5 +1,6 @@
 
-import { StyleSheet, Text, View,TextInput, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, Text, View,TextInput, TouchableOpacity, Alert, Platform} from 'react-native';
+
 
 export default function Input({placeHolder, setValor, contra, setTextChange}) {
 
@@ -22,6 +23,7 @@ const styles = StyleSheet.create({
     backgroundColor:'#A79277',
     color: "#fff", fontWeight:'800',
     width:250,
+    height: Platform.OS === 'ios' ? 50 : 50, // Estilo de la barra de pestañas, altura diferente para iOS y Android
     borderRadius:5,
     padding: 5,
     marginVertical:10

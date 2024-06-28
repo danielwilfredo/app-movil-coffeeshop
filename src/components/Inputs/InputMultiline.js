@@ -1,5 +1,5 @@
 
-import { StyleSheet, Text, View,TextInput, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, Platform, TextInput} from 'react-native';
 
 export default function InputMultiline({placeHolder, setValor, contra, valor}) {
 
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     color: "#fff", fontWeight:'800',
     width:250,
     borderRadius:5,
-    padding: 5,
+    padding: Platform.OS === 'ios' ? 15 : 10, // Estilo de la barra de pestañas, altura diferente para iOS y Android,
     marginVertical:10
   },
 

@@ -1,9 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, Alert } from 'react-native';
-import { useEffect, useState } from 'react';
 import Input from '../components/Inputs/Input'
+import InputEmail from '../components/Inputs/InputEmail'
 import Buttons from '../components/Buttons/Button';
 import * as Constantes from '../utils/constantes'
+import { useFocusEffect } from '@react-navigation/native';
 
 export default function Sesion({ navigation }) {
   const ip = Constantes.IP;
@@ -11,6 +13,14 @@ export default function Sesion({ navigation }) {
   const [isContra, setIsContra] = useState(true)
   const [usuario, setUsuario] = useState('')
   const [contrasenia, setContrasenia] = useState('')
+
+  // Efecto para cargar los detalles del carrito al cargar la pantalla o al enfocarse en ella
+  useFocusEffect(
+    // La función useFocusEffect ejecuta un efecto cada vez que la pantalla se enfoca.
+    React.useCallback(() => {
+      validarSesion(); // Llama a la función getDetalleCarrito.
+    }, [])
+  );
 
   const validarSesion = async () => {
     try {
@@ -21,8 +31,8 @@ export default function Sesion({ navigation }) {
       const data = await response.json();
   
       if (data.status === 1) {
-        cerrarSesion();
-        console.log("Se eliminó la sesión")
+        navigation.navigate('TabNavigator');
+        console.log("Se ingresa con la sesión activa")
       } else {
         console.log("No hay sesión activa")
         return
@@ -53,6 +63,11 @@ export default function Sesion({ navigation }) {
   }
 
   const handlerLogin = async () => {
+    if (!usuario || !contrasenia) {
+      Alert.alert('Error', 'Por favor ingrese su correo y contraseña');
+      return;
+    }
+
     try {
       const formData = new FormData();
       formData.append('correo', usuario);
@@ -92,7 +107,7 @@ export default function Sesion({ navigation }) {
         style={styles.image}
       />
       <Text style={styles.texto}>Iniciar Sesión</Text>
-      <Input
+      <InputEmail
         placeHolder='Usuario'
         setValor={usuario}
         setTextChange={setUsuario}

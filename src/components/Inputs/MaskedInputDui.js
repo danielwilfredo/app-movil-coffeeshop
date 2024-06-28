@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import { TextInputMask } from 'react-native-masked-text';
 
 export default function MaskedInputDui({dui, setDui}) {
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
       fontWeight:'800',
       width:250,
       borderRadius:5,
-      padding: 5,
+      padding: Platform.OS === 'ios' ? 15 : 10, // Estilo de la barra de pestañas, altura diferente para iOS y Android,
       marginVertical:10
     },
   

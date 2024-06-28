@@ -11,16 +11,16 @@ export default function App() {
   const Stack = createNativeStackNavigator(); // Crea una instancia del stack navigator
 
   return (
-    <NavigationContainer> {/* Envuelve la aplicación en un contenedor de navegación */}
+    <NavigationContainer> 
       <Stack.Navigator
         initialRouteName='Sesion' // Establece 'Sesion' como la ruta inicial
         screenOptions={{
           headerShown: false // Oculta el header por defecto
         }}>
-        <Stack.Screen name="Sesion" component={Sesion} /> {/* Define la pantalla 'Sesion' */}
-        <Stack.Screen name="SignUp" component={SignUp} /> {/* Define la pantalla 'SignUp' */}
-        <Stack.Screen name="UpdateUser" component={UpdateUser} /> {/* Define la pantalla 'UpdateUser' */}
-        <Stack.Screen name="TabNavigator" component={TabNavigator} /> {/* Define el navegador de pestañas */}
+        <Stack.Screen name="Sesion" component={Sesion} /> 
+        <Stack.Screen name="SignUp" component={SignUp} /> 
+        <Stack.Screen name="UpdateUser" component={UpdateUser} />
+        <Stack.Screen name="TabNavigator" component={TabNavigator} /> 
       </Stack.Navigator>
     </NavigationContainer>
   );
