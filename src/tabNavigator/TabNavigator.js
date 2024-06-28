@@ -10,8 +10,14 @@ import Carrito from '../screens/Carrito';
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
+<<<<<<< HEAD
   return (
     <Tab.Navigator
+=======
+    return (
+
+<Tab.Navigator
+>>>>>>> cd4753f09b37335ff5ed540f5bdb6b9ad3836859
       screenOptions={({ route }) => ({
         headerShown: false, // Oculta el header
         tabBarActiveTintColor: '#AF8260', // Color de los íconos activos
@@ -19,6 +25,7 @@ const TabNavigator = () => {
         tabBarStyle: { backgroundColor: '#FFF', height: 60, borderTopWidth: 0 }, // Estilo de la barra de pestañas
         tabBarIcon: ({ focused, color, size }) => { // Función que define el ícono de la pestaña
           let iconName;
+<<<<<<< HEAD
           if (route.name === 'Home') { // Si la ruta es 'Home'
             iconName = focused ? 'home' : 'home-outline'; // Ícono para 'Home' (activo o inactivo)
           } else if (route.name === 'Productos') { // Si la ruta es 'Productos'
@@ -27,6 +34,16 @@ const TabNavigator = () => {
             iconName = focused ? 'cart' : 'cart-outline'; // Ícono para 'Carrito' (activo o inactivo)
           }
           return <Ionicons name={iconName} color={color} size={size} />; // Retorna el ícono correspondiente
+=======
+          if (route.name === 'Home') {
+            iconName = focused ? 'home' : 'home-outline';
+          } else if (route.name === 'Productos') {
+            iconName = focused ? 'cafe' : 'cafe-outline';
+          } else if (route.name === 'Carrito') {
+            iconName = focused ? 'cart' : 'cart-outline';
+          }
+          return <Ionicons name={iconName} color={color} size={size} />;
+>>>>>>> cd4753f09b37335ff5ed540f5bdb6b9ad3836859
         },
       })}
     >
@@ -46,7 +63,12 @@ const TabNavigator = () => {
         options={{ title: 'Carrito' }}
       />
     </Tab.Navigator>
+<<<<<<< HEAD
   );
+=======
+    );
+>>>>>>> cd4753f09b37335ff5ed540f5bdb6b9ad3836859
 };
 
 export default TabNavigator;
+
