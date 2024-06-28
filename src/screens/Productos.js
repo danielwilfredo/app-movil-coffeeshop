@@ -20,29 +20,6 @@ export default function Productos({ navigation }) {
   const [idProductoModal, setIdProductoModal] = useState('')
   const [nombreProductoModal, setNombreProductoModal] = useState('')
 
-  /*
-  Ahorita no se ocupa este codigo
-  const volverLogin = async () => {
-    try {
-      const response = await fetch(`${ip}/coffeeshop/api/services/public/cliente.php?action=logOut`, {
-        method: 'GET'
-      });
-
-      const data = await response.json();
-
-      if (data.status) {
-        Alert.alert("Sesion Finalizada")
-      } else {
-        console.log(data);
-        // Alert the user about the error
-        Alert.alert('Error', data.error);
-      }
-    } catch (error) {
-      console.error(error, "Error desde Catch");
-      Alert.alert('Error', 'Ocurrió un error al iniciar sesión con bryancito');
-    }
-  }*/
-
   const volverInicio = async () => {
 
     navigation.navigate('Home');
@@ -126,12 +103,10 @@ export default function Productos({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Catalogo de Productos</Text>
-
       <Buttons
         textoBoton='Volver a Home'
         accionBoton={volverInicio}
       />
-
       <ModalCompra
         visible={modalVisible}
         cerrarModal={setModalVisible}
@@ -140,12 +115,10 @@ export default function Productos({ navigation }) {
         cantidad={cantidad}
         setCantidad={setCantidad}
       />
-
       <View>
         <Text style={styles.subtitle}>
           Selecciona una categoria para filtar productos
         </Text>
-
         <View style={styles.pickerContainer}>
           <RNPickerSelect
             style={{ inputAndroid: styles.picker }}
@@ -157,15 +130,12 @@ export default function Productos({ navigation }) {
             }))}
           />
         </View>
-
       </View>
-
       <SafeAreaView style={styles.containerFlat}>
         <FlatList
           data={dataProductos}
           keyExtractor={(item) => item.id_producto}
           renderItem={({ item }) => ( // Util izamos destructuración para obtener directamente el item
-
             <ProductoCard ip={ip}
               imagenProducto={item.imagen_producto}
               idProducto={item.id_producto}
