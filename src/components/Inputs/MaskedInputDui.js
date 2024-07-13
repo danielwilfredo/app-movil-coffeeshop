@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Platform, StyleSheet } from 'react-native';
 import { TextInputMask } from 'react-native-masked-text';
 
-export default function MaskedInputDui({dui, setDui}) {
+export default function MaskedInputDui({dui, setDui, setEditable}) {
     return (
             <TextInputMask
                 style={styles.Input}
@@ -14,6 +14,7 @@ export default function MaskedInputDui({dui, setDui}) {
                 }}
                 value={dui}
                 onChangeText={setDui}
+                editable={setEditable}
             />
     );
 }

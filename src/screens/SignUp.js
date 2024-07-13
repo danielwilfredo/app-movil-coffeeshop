@@ -169,7 +169,8 @@ return (
                     setTextChange={setDireccion} />
                 <MaskedInputDui
                     dui={dui}
-                    setDui={setDui} />
+                    setDui={setDui}
+                    setEditable={true}/>
                 <View style={styles.contenedorFecha}>
                     <Text style={styles.fecha}>Fecha Nacimiento</Text>
 
