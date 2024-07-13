@@ -132,16 +132,4 @@ if (isset($_GET['action'])) {
     print(json_encode('Recurso no disponible'));
 }
 
-
-// OJO CON ESTA PARTE, ESTE CODIGO VA EN EL ARCHIVO DE LA CLASE CLIENTE_HANDLER.PHP 
-
-//Agregar esta función en el archivo handler.php de clientes
-
-public function readOneCorreo($correo)
-{
-    $sql = 'SELECT id_cliente, nombre_cliente, apellido_cliente, correo_cliente, dui_cliente, telefono_cliente, nacimiento_cliente, direccion_cliente, estado_cliente
-            FROM cliente
-            WHERE correo_cliente = ?';
-    $params = array($correo);
-    return Database::getRow($sql, $params);
-}
+?>
