@@ -1,7 +1,7 @@
 
 import { StyleSheet, TextInput, Platform} from 'react-native';
 
-export default function InputEmail({placeHolder, setValor, setTextChange}) {
+export default function InputEmail({placeHolder, setValor, setTextChange, setEditable}) {
 
   return (
 
@@ -12,6 +12,7 @@ export default function InputEmail({placeHolder, setValor, setTextChange}) {
     placeholderTextColor={'#FFF'}
     onChangeText={setTextChange}
     keyboardType="email-address"
+    editable={setEditable}
     />
 
   );

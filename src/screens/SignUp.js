@@ -161,7 +161,8 @@ return (
                 <InputEmail
                     placeHolder='Email Cliente'
                     setValor={email}
-                    setTextChange={setEmail} />
+                    setTextChange={setEmail} 
+                    setEditable={true}/>
                 <InputMultiline
                     placeHolder='Dirección Cliente'
                     setValor={setDireccion}

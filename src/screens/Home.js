@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Alert, Image } from 'react-native';
 import Buttons from '../components/Buttons/Button';
 import * as Constantes from '../utils/constantes';
+import { useFocusEffect } from '@react-navigation/native';
 
 export default function Home({ navigation }) {
   const [nombre, setNombre] = useState(null);
@@ -47,10 +48,12 @@ export default function Home({ navigation }) {
     }
   };
 
-  useEffect(() => {
-    getUser();
-  }, []);
-
+    // logica para cargar los datos del usuario al cargar la pantalla
+    useFocusEffect(
+      React.useCallback(() => { 
+          getUser();
+      }, [])  
+  );
   return (
     <View style={styles.container}>
       <Image
