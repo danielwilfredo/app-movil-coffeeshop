@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import { Platform, TextInput, StyleSheet } from 'react-native';
-import { TextInputMask } from 'react-native-masked-text';
+import { MaskedTextInput } from 'react-native-mask-text';
 
 export default function MaskedInputTelefono({telefono, setTelefono}) {
     return (
-            <TextInputMask
-                style={styles.Input}
-                placeholder="Teléfono"
-                placeholderTextColor="#fff"
-                type={'custom'}
-                options={{
-                    mask: '9999-9999' // Formato para el número de teléfono
-                }}
-                value={telefono}
-                onChangeText={setTelefono}
-            />
+        <MaskedTextInput
+        mask="9999-9999"
+        placeholder='Telefono'
+        placeholderTextColor="#fff"
+        onChangeText={(text) => {
+            setTelefono(text);
+        }}
+        style={styles.Input}
+        keyboardType="numeric"
+        value={telefono}  
+   />
     );
 }
 

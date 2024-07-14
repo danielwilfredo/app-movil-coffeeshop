@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 import { Platform, StyleSheet } from 'react-native';
-import { TextInputMask } from 'react-native-masked-text';
+import { MaskedTextInput } from 'react-native-mask-text';
 
 export default function MaskedInputDui({dui, setDui, setEditable}) {
     return (
-            <TextInputMask
-                style={styles.Input}
-                placeholder="Dui"
-                placeholderTextColor="#fff"
-                type={'custom'}
-                options={{
-                    mask: '99999999-9' // Formato para el número de teléfono
-                }}
-                value={dui}
-                onChangeText={setDui}
-                editable={setEditable}
-            />
+        <MaskedTextInput
+        mask="99999999-9"
+        placeholder='Dui'
+        placeholderTextColor="#fff"
+        onChangeText={(text) => {
+          setDui(text);
+        }}
+        style={styles.Input}
+        keyboardType="numeric"
+        editable={setEditable}
+        value={dui}  
+   />
     );
 }
 

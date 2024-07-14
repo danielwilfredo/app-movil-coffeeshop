@@ -13,7 +13,6 @@ export default function Sesion({ navigation }) {
   const [isContra, setIsContra] = useState(true)
   const [usuario, setUsuario] = useState('')
   const [contrasenia, setContrasenia] = useState('')
-
   // Efecto para cargar los detalles del carrito al cargar la pantalla o al enfocarse en ella
   useFocusEffect(
     // La función useFocusEffect ejecuta un efecto cada vez que la pantalla se enfoca.
@@ -21,7 +20,6 @@ export default function Sesion({ navigation }) {
       validarSesion(); // Llama a la función getDetalleCarrito.
     }, [])
   );
-
   const validarSesion = async () => {
     try {
       const response = await fetch(`${ip}/coffeeshop/api/services/public/cliente.php?action=getUser`, {
@@ -98,7 +96,7 @@ export default function Sesion({ navigation }) {
     navigation.navigate('SignUp');
   };
 
-  useEffect(() => { validarSesion() }, [])
+  //useEffect(() => { validarSesion() }, [])
 
   return (
     <View style={styles.container}>
