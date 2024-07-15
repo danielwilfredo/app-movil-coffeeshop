@@ -1,6 +1,6 @@
 {
   "cli": {
-    "version": ">= 10.0.2"
+    "version": ">= 10.1.1"
   },
   "build": {
     "development": {
@@ -8,25 +8,14 @@
       "distribution": "internal"
     },
     "preview": {
-      "distribution": "internal"
-    },
-    "production": {
+      "distribution": "internal",
       "android": {
-        "buildType": "apk",
-        "gradleCommand": ":app:assembleRelease"
+        "buildType": "apk" 
       }
-    }
+    },
+    "production": {}
   },
   "submit": {
-    "production": {
-      "android": {
-        "serviceAccountKeyPath": "./path/to/your-service-account.json",
-        "track": "production"
-      },
-      "ios": {
-        "appleId": "your-apple-id",
-        "ascAppId": "your-app-id"
-      }
-    }
+    "production": {}
   }
 }
