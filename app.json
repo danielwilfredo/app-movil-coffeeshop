@@ -4,7 +4,7 @@
     "slug": "cliente-app-coffeeshop",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/coffee-cup.png",
+    "icon": "./assets/coffee-cup-splash.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/coffeeshop-splash.png",
@@ -19,7 +19,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/coffee-cup-splash.png",
+        "foregroundImage": "./assets/coffee-cup.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.danielwilfredo11.clienteappcoffeeshop"
